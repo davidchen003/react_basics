@@ -174,7 +174,7 @@ export default Header;
   );
   };
   ```
-- use Chrome Dev Tool **React Extension** (select Components instead of Console) to see teh App.js hook state reminder changes when you double click the tasks
+- use Chrome Dev Tool **React Extension** (select Components instead of Console) to see the App.js hook state reminder changes when you double click the tasks
 
 ## Template literals, conditional className
 
@@ -188,3 +188,17 @@ export default Header;
   when we double click the task, the green left boarder will be on and off
 
 **Commit 4**
+
+## AddTask.js
+
+- import it in App.js
+- useState, `onChange={(e) => setText(e.target.value)}` etc.
+- use Chrome Dev Tool **React Extension** (select Components instead of Console), you can see the 3 states change under AddTask as you enter the text and check the Set Reminder.
+- addTask() in App.js, and pass it down to AddTask.js
+- `checked={reminder}`, so when the form reset (checked = false), it is unchecked. **otherwise, the last check remains** after you clicked the Save button.
+- in AddTask.js, `<form className="add-form" onSubmit={onSubmit}>`and create the `onSubmit()`. We are not using the `onAdd` directly, because there are a few things to take care before we pass the data
+  - `e.preventDefault()`
+  - data validation
+  - clear the form, setState
+
+**Commit 5**
