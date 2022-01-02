@@ -111,6 +111,12 @@ export default Header;
 
 **Commit 1**
 
-- use style sheet e.g. `index.css`
+- use style sheet e.g. `index.css` (copied from course github code), which is automatically imported into `index.js`
 
-- style components as external package (very popular)
+- style components as external package (very popular) (not immplemented)
+
+## Button.js component
+
+- so we can reuse this Button component in many places with different color, text, and onClick function.
+
+**Commit 2**
