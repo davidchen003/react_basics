@@ -147,3 +147,44 @@ export default Header;
   - so in Task.js, instead of just `onClick={onDelete}`, use
 
 **Commit 3**
+
+## conditional rendering
+
+- change `<Tasks tasks={tasks} onDelete={deleteTask} />` to
+  ````
+    {tasks.length > 0 ? (
+      <Tasks tasks={tasks} onDelete={deleteTask} />
+    ) : (
+      "No Tasks To Show"
+    )}
+    ```
+  ````
+- try it out by deleting all the tasks
+
+## Toggle Reminder
+
+- toggleReminder(), App.js -> Tasks.js -> Task.js
+- change (setState) individual key/value of the state
+  ```
+    const toggleReminder = (id) => {
+  setTasks(
+    tasks.map((task) =>
+      task.id === id ? { ...task, reminder: !task.reminder } : task
+    )
+  );
+  };
+  ```
+- use Chrome Dev Tool **React Extension** (select Components instead of Console) to see teh App.js hook state reminder changes when you double click the tasks
+
+## Template literals, conditional className
+
+- in Task.js change `<div className="task"` to `<div className={`task ${task.reminder ? 'reminder' : ''}`}>`
+- because of what we have in index.css
+  ```
+  .task.reminder {
+      border-left: 5px solid green;
+      }
+  ```
+  when we double click the task, the green left boarder will be on and off
+
+**Commit 4**
