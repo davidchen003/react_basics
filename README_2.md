@@ -202,3 +202,24 @@ export default Header;
   - clear the form, setState
 
 **Commit 5**
+
+## toggle show/no show AddTask
+
+- **&& conditional rendering**, in App.js
+  - `const [showAddTask, setShowAddTask] = useState(false)`
+  - change `<AddTask onAdd={addTask} />` to `{showAddTask && <AddTask onAdd={addTask} />}`
+- `onAdd={() => setShowAddTask(!showAddTask)}`, don't confuse this onAdd prop with the other one
+- pass onAdd prop to Header.js
+- in Header.js, `onClick={onAdd}`
+
+- so now when you click the Add button, the AddTask form shows and disappears
+
+## Add button change text conditionally
+
+- in Add.js, <header>, add `showAdd={showAddTask}` prop
+- in Header.js, change <Button>, from `text='Add'` to `text={showAdd ? "Close" : "Add"}`
+
+- now when the AddTask is shown, the button text is "Close"; when the Add Task form is hidden, the button text is "Add"
+- we can also change the button color conditionally, from `color="green"` to `color={showAdd ? "red" : "green"}`
+
+**Commit 6**
