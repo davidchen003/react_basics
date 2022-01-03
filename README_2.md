@@ -299,7 +299,7 @@ export default Header;
 
   - delete the initial tasks info in `const [tasks, setTasks] = useState([])`
 
-- open another terminal to start our website `npm start` (at port 3000)
+- open another terminal to start our website `npm start` (at port 3000) (this is **deverlopment build**, not the **production build** above )
 
 **Commit 7**
 
@@ -331,3 +331,29 @@ export default Header;
 - we'll see the tasks are fetched JSON server and displayed at our web page
 
 **Commit 8**
+
+## Delete task
+
+- at this moment we can delete the tasks from UI, but not from server, so when we refresh, the old data loads back
+
+## Add task
+
+- no need to create id, it will be assigned automatically
+
+## Fetch a single task, and update the toggled reminder to server
+
+- in App.js
+
+  ```
+  const fetchTask = async (id) => {
+  const res = await fetch(`http://localhost:5000/tasks/${id}`);
+  const data = await res.json();
+  return data;
+  };
+  ```
+
+- and update the `const toggleReminder = async (id) => {` accordingly
+
+- now when we toggle the reminder, it update permanently in the server (instead of just in UI)
+
+**Commit 9**
