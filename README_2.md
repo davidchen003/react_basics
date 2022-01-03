@@ -267,7 +267,7 @@ export default Header;
 - `npm i jason-server`
 - in `package.jason`, under "scripts:" section, add
 
-  - `"server":"jason-server --watch db.json --port 5000"`
+  - `"server":"jason-server --watch db.json --port 5000"` (may not be necessary per following errow message and the working command)
 
 - `npm run server`
 
@@ -304,3 +304,30 @@ export default Header;
 **Commit 7**
 
 ## Fetching data (tasks) from server
+
+- the data can be see at `http://localhost:5000/tasks`
+
+- `useEffect()` hook
+
+  ```
+    useEffect(() => {
+  const getTasks = async () => {
+    const tasksFromServer = await fetchTasks();
+    setTasks(tasksFromServer);
+  };
+
+  getTasks();
+  }, []);
+
+  // fetch data
+  // moving this out of useEffect so others can use it
+  const fetchTasks = async () => {
+  const res = await fetch("http://localhost:5000/tasks");
+  const data = await res.json();
+  return data;
+  };
+  ```
+
+- we'll see the tasks are fetched JSON server and displayed at our web page
+
+**Commit 8**
