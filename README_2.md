@@ -357,3 +357,43 @@ export default Header;
 - now when we toggle the reminder, it update permanently in the server (instead of just in UI)
 
 **Commit 9**
+
+## Rounting (briefy and messy, should have introduced earlier)
+
+- `npm i react-router-dom`
+
+- add `Footer.js`, and import it in App.js
+- add `About.js`
+
+- in App.js
+  - `import { BrowserRouter as Router, Route } from 'react-router-dom'`
+  - wrap the whole `return` by `<Router></Router>`
+  - instead of import About.js as we did to Footer.js, use
+    - `<Route path="/about" component={About} />`
+- ...
+
+## useLocation
+
+- to get rid of Add button on About page
+- Header.js
+  - `const location = useLocation()`, which allows us to look at the current route we are in
+  - change
+    ```
+    <Button
+    color={showAdd ? "red" : "green"}
+    text={showAdd ? "Close" : "Add"}
+    onClick={onAdd}
+    />
+    ```
+    to
+    ```
+    {location.pathname === "/" && (
+      <Button
+        color={showAdd ? "red" : "green"}
+        text={showAdd ? "Close" : "Add"}
+        onClick={onAdd}
+      />
+    )}
+    ```
+
+**Commit 10**
