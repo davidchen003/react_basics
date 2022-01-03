@@ -223,3 +223,84 @@ export default Header;
 - we can also change the button color conditionally, from `color="green"` to `color={showAdd ? "red" : "green"}`
 
 **Commit 6**
+
+## Build for production/deployment
+
+- `nmp run build`
+- a folder `build` will be created, which is what you'll push for production
+
+  ```
+  The project was built assuming it is hosted at /.
+  You can control this with the homepage field in your package.json.
+
+  The build folder is ready to be deployed.
+  You may serve it with a static server:
+
+  npm install -g serve
+  serve -s build
+
+  Find out more about deployment here:
+
+  https://cra.link/deployment
+  ```
+
+- we can deploy it locally
+  - `npm install -g serve`
+  - `serve -s build `
+  ```
+   Serving!                                      │                                                │
+      Local: http://localhost:3000     │
+      On Your Network:  http://172.22.48.1:3000
+  ```
+  - or we can specify a port (e.g. 8000), ``serve -s build -p 8000`
+- now you can see the website at http://localhost:3000
+- the react icon of Chrome turned from orange to blue; when you click it, it reads: This page is using the production build of React.
+- now, even if you delete all the folders other than the build folder, the website will still work.
+
+# JASON Server
+
+## Setting up
+
+- [github](https://github.com/typicode/json-server)
+- it's kind of a **Mock API/backend**
+
+- `npm i jason-server`
+- in `package.jason`, under "scripts:" section, add
+
+  - `"server":"jason-server --watch db.json --port 5000"`
+
+- `npm run server`
+
+  - got error message `'jason-server' is not recognized as an internal or external command, operable program or batch file.`
+
+- run again with `npx json-server --watch db.json --port 5000` with success.
+- You'll see the file `db.json` is added. Open it and change it to:
+
+  ```
+  {
+  "tasks": [
+      {
+      "id": 1,
+      "text": "Doctors Appointment",
+      "day": "Feb 5th at 2:30pm",
+      "reminder": true
+      },
+      {
+      "id": 2,
+      "text": "Meeting at School",
+      "day": "Feb 6th at 1:30pm",
+      "reminder": true
+      }
+  ]
+  }
+  ```
+
+  - it's the same structure as our tasks JS object, but now it's JSON, **the keys need quotes around them**
+
+  - delete the initial tasks info in `const [tasks, setTasks] = useState([])`
+
+- open another terminal to start our website `npm start` (at port 3000)
+
+**Commit 7**
+
+## Fetching data (tasks) from server
