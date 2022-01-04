@@ -93,3 +93,42 @@
   - instead we'll use the `link` component, react DOM attachs a click listener to it, prevents the browser default click action (sending the request), instead just parse the url you want to go to, change the url in the url bar, and load the appropriate page/component on the screen, all within Javascript/react. So we stay on this already loaded page and don't this extra request.
 
 **Commit B1-2**
+
+## Styling
+
+- for big projects, typically there are different css files for different components
+- it would be better if these css files are scoped to their corresponding components, not affecting other components, which can be accomplished by the **CSS Modules** provided by react.
+
+- create `MainNavigation.module.css`, need to following this name convention for react **CSS Modules** to work correctly (scope the CSS only to `MainNavigation.js` component)
+- in `MainNavigation.js`, `import classes from './MainNavigation.module.css';`
+- apply/attach the css classes from `MainNavigation.module.css` to the appropriate elements in `MainNavigation.js`
+  ```
+  <header className={classes.header}>
+    <div className={classes.logo}>React Meetups</div>
+  ```
+
+## Outputing data: simple version
+
+- Dummy data and list mapping in `AllMeetups.js`
+
+  ```
+  <ul>
+      {DUMMY_DATA.map((meetup) => {
+        return <li key={meetup.id}>{meetup.title}</li>;
+      })}
+  </ul>
+  ```
+
+## Outputing data: structured with more components: AllMeetup-MeetupList-MeetupItem
+
+- create `meetups` folder under `components`
+- add `MeetupItem.js`, `MeetupList.js`, and their respective CSS files
+- `AllMeetups.js`
+  ```
+  <section>
+    <h1>All Meetups</h1>
+    <MeetupList meetups={DUMMY_DATA} />
+  </section>
+  ```
+
+**Commit B1-3**
