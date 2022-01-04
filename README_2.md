@@ -2,6 +2,10 @@
 [style files and dummy data](https://github.com/academind/react-complete-guide-code/tree/zz-reactjs-summary/extra-files)
 [code, snapshot by sections](https://github.com/academind/react-complete-guide-code/tree/zz-reactjs-summary/extra-files)
 
+- **SPA**: single page application
+
+# To-Do project
+
 ## Setup
 
 - Git branched from `51c7240 Initialize project using Create React App`.
@@ -42,3 +46,50 @@
 - we can do the same for Confirm and Cancel button of the modal
 
 **Commit B1-1**
+
+# Meetup Project
+
+- start from scratch
+
+## Routing
+
+- `npm install react-router-dom`
+
+- it allows us to change what visiable on the screen, based on URL, without fetching new html pages.
+- it's an allusion of routing since it is SPA (single page application, for better UX)
+
+- add `pages` folder (not a must, just good practice) for the components that will be loaded as "pages", to differentiate from other components.
+
+- in index.js
+  - `import { BrowserRouter } from "react-router-dom";`
+  - and then wrap up the App with { BrowserRouter }, which is itself a component too
+    ```
+    <BrowserRouter>
+        <App />
+    </BrowserRouter>
+    ```
+- in App.js
+
+  - `import { Route, Routes } from "react-router-dom";`
+    - In **react-router-dom v6**, `Switch` is replaced by `Routes`, Route syntax also changed.
+  - then,
+    ```
+    <div>
+      <Routes>
+        <Route exact path="/" element={<AllMeetupsPage />} />
+        <Route path="/new-meetup" element={<NewMeetupPage />} />
+        <Route path="/favorites" element={<FavoritesPage />} />
+      </Routes>
+    </div>
+    ```
+
+- w/o this `exact`, this root path will be the one show up when the url is `http://localhost:3000/new-meetup`
+
+- Create **links** for routing
+  - create `layout/MainNavigation.js`, it is not a page loaded via routing, but a general layout
+    - `<Link to="/new-meetup">Add New Meetup</Link>` etc.
+  - import/use it to App.js
+  - we don't use the standard html **anchor tag** `<a href=' '>` here, because what it does is to send the request to the server, where the router will figure out what page to load. This is not efficient since we already are running our react application.
+  - instead we'll use the `link` component, react DOM attachs a click listener to it, prevents the browser default click action (sending the request), instead just parse the url you want to go to, change the url in the url bar, and load the appropriate page/component on the screen, all within Javascript/react. So we stay on this already loaded page and don't this extra request.
+
+**Commit B1-2**
