@@ -2,6 +2,8 @@
 [style files and dummy data](https://github.com/academind/react-complete-guide-code/tree/zz-reactjs-summary/extra-files)
 [code, snapshot by sections](https://github.com/academind/react-complete-guide-code/tree/zz-reactjs-summary/extra-files)
 
+- **firebase** as the backend/database
+  - used **Realtime Database**, not the **Cloud Firestore Database**
 - **SPA**: single page application
 
 # To-Do project
@@ -175,3 +177,31 @@
 - to get the input value we could use
   - `useState` as before
   - but we'll use `useRef` this time since we only interested in getting the user input once.
+
+**Commit B1-6**
+
+## firebase
+
+- used **Realtime Database**, not the **Cloud Firestore Database**
+- create a project and "start in test mode" (not the "lock mode", otherwise you won't be able to send the request)
+
+- we could put the data submit request in `NewMeetupForm.js`, but it's already crowed there, so we'll pass the data to `NewMeetup.js` via `props.onAddMeetup(meetupData);`
+- in `NewMeetup.js`, we define the `onAddMeetup`
+  ```
+    function addMeetupHandler(meetupData) {
+    fetch("https://academind2-default-rtdb.firebaseio.com/meetups.json", {
+      method: "POST",
+      body: JSON.stringify(meetupData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  }
+  ```
+  - http address is from my firebase account + `meetups.json` (which created a meetup folder in the database, for better organization)
+  - `method=POST` for storing data (otherwise the default will be `GET` under `fetch`)
+  - once we specify `POST` we need to provide data in `body`
+  - http address is from my AcadeMind2 (the old one AcadeMind somehow doesn't work anymore)
+  - at this moment, when you click `AddMeetup`, nothing seems to happen, but the data is actually already sent to firebase (where you can verify)
+
+**Commit B1-7**
