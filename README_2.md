@@ -224,3 +224,20 @@
     which delivers us to the starting (AllMeetups) page after data posted
 
 **Commit B1-8**
+
+## fetching data from firebase, useEffect
+
+- react functions such as `AllMeetupPage()` in `AllMeetups.js` can't be asyn. The way to prevent the `return` jumps ahead before the data loading is finished is to use use the `isLoading` State
+
+  - `setIsLoading(false)` when data is loaded and then run AllMeetup components
+
+- useEffect to break the infinite loop (fetch data -> set state -> fetch data).
+
+  - when the `dependency` is left empty `[]` for useEffect, it would only execute the first time the component is run.
+
+- now the homepage `AllMeetups` will show the data loaded from firebase database, no longer from the dummy data.
+- when a new meetup is added, it will show up immediately on the AllMeetup page.
+
+**Commit B1-9**
+
+##
