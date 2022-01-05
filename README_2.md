@@ -205,3 +205,22 @@
   - at this moment, when you click `AddMeetup`, nothing seems to happen, but the data is actually already sent to firebase (where you can verify)
 
 **Commit B1-7**
+
+## Navigating programmatically, useNavigate hook
+
+- In react-router-dom v6 `useHistory()` is replaced by `useNavigate()`.
+
+- in `NewMeetup.js`
+
+  -`import { useNavigate() } from "react-router-dom";`
+
+  - `const navigate = useNavigate();`
+  - after the `fetch` promise add
+    ```
+    .then(() => {
+      navigate('/');
+    });
+    ```
+    which delivers us to the starting (AllMeetups) page after data posted
+
+**Commit B1-8**
