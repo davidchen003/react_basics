@@ -148,7 +148,7 @@
 
 - create another custom wrapper component `layout.js` in `layout` folder, together with its CSS module file
   ```
-      <div>
+    <div>
       <MainNavigation />
       <main className={classes.main}>{props.children}</main>
     </div>
@@ -157,7 +157,7 @@
 
 **Commit B1-4**
 
-## User input and form submission
+## User input form
 
 - create `NewMeetupForm.js` and its CSS module file
   - also uses `<Card>` wrapper component for styling
@@ -167,3 +167,11 @@
 - the form doesn't actually work (submit anything) yet, but it's there.
 
 **Commit B1-5**
+
+## `useRef` and form submission
+
+- `event.preventDefault()` to prevent the default submit action of the browser (sending request to the server that serves the page). instead we want it to run our own Javascript logic.
+
+- to get the input value we could use
+  - `useState` as before
+  - but we'll use `useRef` this time since we only interested in getting the user input once.
