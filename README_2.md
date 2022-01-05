@@ -94,7 +94,7 @@
 
 **Commit B1-2**
 
-## Styling
+## Styling, via CSS module files
 
 - for big projects, typically there are different css files for different components
 - it would be better if these css files are scoped to their corresponding components, not affecting other components, which can be accomplished by the **CSS Modules** provided by react.
@@ -132,3 +132,27 @@
   ```
 
 **Commit B1-3**
+
+## Styling, via wrapper component, enabled by props.children
+
+- can be (re)used for other components too
+- create a `ui` folder under `component`, for some user-interface components that don't belong to specific feature, but can be used in different places of the app.
+- create `Card.js` in it, together with it's CSS module file
+  ```
+  function Card(props) {
+  return <div className={classes.card}>{props.children}</div>;
+  }
+  ```
+- `children` prop is a special prop which every component receives by default. `children` holds the content before the openning and closing tags.
+- import and use it in `MeetupItem.js`
+
+- create another custom wrapper component `layout.js` in `layout` folder, together with its CSS module file
+  ```
+      <div>
+      <MainNavigation />
+      <main className={classes.main}>{props.children}</main>
+    </div>
+  ```
+- import and use it in `App.js` to replace the `<MainNavigation />`, which affect all routes and their pages
+
+**Commit B1-4**
