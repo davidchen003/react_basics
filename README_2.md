@@ -156,3 +156,14 @@
 - import and use it in `App.js` to replace the `<MainNavigation />`, which affect all routes and their pages
 
 **Commit B1-4**
+
+## User input and form submission
+
+- create `NewMeetupForm.js` and its CSS module file
+  - also uses `<Card>` wrapper component for styling
+  - similar to `className` (instead of standard `class`), we use `htmlFor (instead of `for`) as in `<label htmlFor="title">`
+  - unless we specify `type="button"`, the regular button inside the `<form>` will submit the form.
+- import/use in `AllMeetups.js`
+- the form doesn't actually work (submit anything) yet, but it's there.
+
+**Commit B1-5**
