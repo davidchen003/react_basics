@@ -240,4 +240,110 @@
 
 **Commit B1-9**
 
-##
+## useContext, managing global states
+
+- to manage (add to, remove from, count) favorites, need global states that affect different components.
+- one way is to manage the "global" states in App.js and pass them down the chain. the downside
+
+  - the App.js will be a bit too bulky
+  - the chain going to be long and complicated (many of the components probably won't even use it but need to serve the passing-by role)
+
+- there are other ways to manage global states. one popular solution is **Redux**. but for many applications we don't even need that because react has it own built-in state management tool **useContext**
+
+### wrapper component with global states
+
+- create a `store` fold under `src`
+- create `favorites-context.js` file in it
+
+- `export function FavoritesContextProvider(props) {`
+  and
+
+  ```
+  return (
+    <FavoritesContext.Provider value={context}>
+      {props.children}
+    </FavoritesContext.Provider>
+  );
+  ```
+
+  - so other components that are wrapped by `FavoritesContextProvider` will also wrapped by `<FavoritesContext.Provider>` and therefore those components will be listening to the changes of the content of `FavoritesContext`
+
+- state update
+
+  ```
+  setUserFavorites((prevUserFavorites) => {
+  return prevUserFavorites.concat(favoriteMeetup);
+  });
+  ```
+
+  is much better than the state update method below because it ensures instant update
+
+  ```
+  setUserFavorites(userFavorites.concat(favoriteMeetup));
+  ```
+
+- `export default FavoritesContext;` note that we have **two export** in this component
+
+- passing `context` as props
+
+  ```
+    const context = {
+    favorites: userFavorites,
+    totalFavorites: userFavorites.length,
+    addFavorite: addFavoriteHandler,
+    removeFavorite: removeFavoriteHandler,
+    itemIsFavorite: itemIsFavoriteHandler,
+  };
+  ```
+
+  so we expose these states and functions to all interested components
+
+### Button toggling: 'To Favorites'/'Remove from Favorites'
+
+- now the `favorites-context.js` component is done, we can use it to wrap the components that need the context, they are `Favorites.js`, `MainNavigations.js`, and `AllMeetups.js`. So probably the easiest is to wrap everything, i.e. to wrap the `App.js` in `index.js`
+
+```
+  ReactDOM.render(
+  <FavoritesContextProvider>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </FavoritesContextProvider>,
+  document.getElementById('root')
+  );
+```
+
+- `MeetupItem.js`
+
+  - ```
+    import { useContext } from 'react';`
+    import FavoritesContext from '../../store/favorites-context';
+    ```
+  - ```
+    const favoritesCtx = useContext(FavoritesContext);
+
+    const itemIsFavorite = favoritesCtx.itemIsFavorite(props.id);
+
+    function toggleFavoriteStatusHandler() {
+      if (itemIsFavorite) {
+        favoritesCtx.removeFavorite(props.id);
+      } else {
+        favoritesCtx.addFavorite({
+          id: props.id,
+          title: props.title,
+          description: props.description,
+          image: props.image,
+          address: props.address,
+        });
+      }
+    }
+    ```
+
+  ````
+  - ```
+      <button onClick={toggleFavoriteStatusHandler}>
+        {itemIsFavorite ? 'Remove from Favorites' : 'To Favorites'}
+      </button>
+  ````
+
+**Commit B1-10**
