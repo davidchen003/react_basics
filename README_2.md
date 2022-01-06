@@ -347,3 +347,33 @@
   ````
 
 **Commit B1-10**
+
+### Update Favorites.js page
+
+- ```
+  import { useContext } from "react";
+  import FavoritesContext from "../store/favorites-context";
+  ...
+  function FavoritesPage() {
+  const favoritesCtx = useContext(FavoritesContext);
+  ```
+
+- now we can add and remove favorites. However, at this moment the info is stored in memory, not in permanent database. So once we refresh the page, the info is gone.
+
+### adding a badge on nav bar to indicate number of favorites
+
+- MainNavigation.js
+- ```
+  import { useContext } from "react";
+  import FavoritesContext from "../../store/favorites-context";
+  ```
+- ```
+  <Link to="/favorites">
+    My Favorites
+    <span className={classes.badge}>
+      {favoritesCtx.totalFavorites}
+    </span>
+  </Link>
+  ```
+
+**Commit B1-11**
